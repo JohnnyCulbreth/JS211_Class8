@@ -1,12 +1,15 @@
+let today = new Date()
+let currentYear = today.getFullYear()
+
 // Use a do...while loop to console.log the numbers from 1 to 1000.
 
 const countTo100 = () => {
-    let num = 1
+    let num = 0
 
-    do {
+    while (num < 100) {
         num += 1;
         console.log('The number is currently: ' + num + '!')
-    } while (num < 100)
+    }
 }
 
 countTo100()
@@ -51,12 +54,71 @@ const arrayOfPersons = [
     }
 ]
 
+const accountOf = (array, name) => {
+    for (account of array) {
+        if (account.firstName == name) {
+            // console.log("Found the account:", account)
+            return(account)
+        }
+    }
+}
+
+const birthDateOf = (account) => {
+    let birthYear = account.birthDate.split(" ")[2]
+    return (birthYear)
+}
+
 // Create a function that uses a for...of loop and an if statement to console.log the value associated with the key birthDate of each object if the birth year is an odd number.
 
-const keyBirth = (arr) => {
-    let
-    for (author of arr) {
-        text += author + " and... ";
+const keyBirth = (array) => {
+    for (account of array) {
+        // console.log("Check:", account)
+        let birthYear = getBirthDate(account)
+        let birthdayIsOdd = parseInt(birthYear) % 2 !== 0
+        if (birthdayIsOdd) {
+            // console.log(account.birthDate)
+            return(account.birthDate)
+        }
       }
-      return text
 }
+keyBirth(arrayOfPersons)
+
+let personsWithColor = arrayOfPersons.map(account => {
+    // console.log('person before:', person)
+    account.color = 'blue'
+    // console.log('person now:', person)
+    return account
+})
+
+let malePersons = arrayOfPersons.filter(account => {
+    if (account.gender === 'male') {
+        return account
+    }
+})
+// console.log(malePersons)
+
+const beforeDate = (arr) => {
+    for (account of arr) {
+        // console.log("Check:", account)
+        let birthYear = getBirthDate(account)
+        personIsOld = birthYear < 1990
+        if (personIsOld) {
+            // console.log(account, "this person is OLD!")
+            return(true)
+        }
+      }
+}
+beforeDate(arrayOfPersons)
+
+const ageCheck = (birthYear) => {
+    let over21 = parseInt(currentYear) - parseInt(birthYear) >= 21
+    if (over21) {
+        console.log("Person is OVER 21!")
+        return(true)
+    } else {
+        console.log("Person is UNDER 21!")
+        return(false)
+    }
+}
+
+ageCheck(birthDateOf(accountOf(arrayOfPersons, "James")))
